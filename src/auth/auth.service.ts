@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService, // ตรวจสอบว่าคุณกำลัง inject JwtService อย่างถูกต้อง
-  ) {}
+  ) { }
 
   async signIn(
     username: string,
@@ -22,6 +22,7 @@ export class AuthService {
       throw new NotFoundException('User not found');
     }
     const isMatch = password === user.userPassword;
+
     if (!isMatch) {
       throw new UnauthorizedException('Passwords do not match');
     }
