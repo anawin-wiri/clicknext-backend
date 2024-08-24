@@ -10,7 +10,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) {}
+  ) { }
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
   }
@@ -37,8 +37,16 @@ export class UsersService {
     }
     return user;
   }
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOne({
+      where: { userId: id },
+    })
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    user.userPoints = updateUserDto.userPoints;
+    await this.userRepository.save(user);
+    return user;
   }
 
   remove(id: number) {

@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService, // ตรวจสอบว่าคุณกำลัง inject JwtService อย่างถูกต้อง
-  ) { }
+  ) {}
 
   async signIn(
     username: string,
