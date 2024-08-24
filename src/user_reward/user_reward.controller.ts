@@ -38,6 +38,11 @@ export class UserRewardController {
     return this.userRewardService.findOneById(userId, rewardId);
   }
 
+  @Get('user/:userId')
+  findById(@Param('userId') userId: number,) {
+    return this.userRewardService.findById(userId);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

@@ -62,6 +62,20 @@ export class UserRewardService {
     return userReward;
   }
 
+  findById(userId: number) {
+    const userReward = this.userRewardRepository.find({
+      where: { userId: userId },
+      relations: {
+        user: true,
+        reward: true,
+      }
+    });
+    if (!userReward) {
+      throw new NotFoundException('User reward not found');
+    }
+    return userReward;
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} userReward`;
   }
