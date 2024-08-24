@@ -48,11 +48,14 @@ export class UserRewardService {
     return `This action returns all userReward`;
   }
 
-  findOneByUserId(userId: number) {
-    const userReward = this.userRewardRepository.find({
-      where: { userId: userId },
-      relations: { user: true, reward: true },
-    })
+  findOneById(userId: number, rewardId: number) {
+    const userReward = this.userRewardRepository.findOne({
+      where: { userId: userId, rewardId: rewardId },
+      relations: {
+        user: true,
+        reward: true,
+      }
+    });
     if (!userReward) {
       throw new NotFoundException('User reward not found');
     }

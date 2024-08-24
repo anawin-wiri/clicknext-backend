@@ -30,9 +30,12 @@ export class UserRewardController {
     return this.userRewardService.findOne(+id);
   }
 
-  @Get('user/:userId')
-  findOneByUserId(@Param('userId') id: number) {
-    return this.userRewardService.findOneByUserId(+id);
+  @Get('user/:userId/reward/:rewardId')
+  findOneById(
+    @Param('userId') userId: number,
+    @Param('rewardId') rewardId: number
+  ) {
+    return this.userRewardService.findOneById(userId, rewardId);
   }
 
   @Patch(':id')
