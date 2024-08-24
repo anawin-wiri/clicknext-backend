@@ -30,14 +30,14 @@ export class RewardService {
     return res;
   }
 
-  async update(id: number) {
+  async update(id: number, updateRewardDto: UpdateRewardDto) {
     const reward = await this.rewardRepository.findOne({
       where: { rewardId: id },
     })
     if (!reward) {
       throw new NotFoundException('Reward not found');
     }
-    reward.rewardAmount = reward.rewardAmount - 1;
+    reward.rewardAmount = updateRewardDto.rewardAmount;
     this.rewardRepository.save(reward);
     return reward;
 

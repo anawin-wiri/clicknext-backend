@@ -13,7 +13,7 @@ import { UpdateUserRewardDto } from './dto/update-user_reward.dto';
 
 @Controller('user-reward')
 export class UserRewardController {
-  constructor(private readonly userRewardService: UserRewardService) {}
+  constructor(private readonly userRewardService: UserRewardService) { }
 
   @Post()
   create(@Body() createUserRewardDto: CreateUserRewardDto) {
@@ -28,6 +28,11 @@ export class UserRewardController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userRewardService.findOne(+id);
+  }
+
+  @Get('user/:userId')
+  findOneByUserId(@Param('userId') id: number) {
+    return this.userRewardService.findOneByUserId(+id);
   }
 
   @Patch(':id')
